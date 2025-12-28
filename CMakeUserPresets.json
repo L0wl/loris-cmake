@@ -1,0 +1,102 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "local-qt",
+            "hidden": true,
+            "generator": "MinGW Makefiles",
+            "description": "Path to your qt installation, your compiller and generator",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/g++.exe",
+                "DCMAKE_RANLIB": "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib.exe",
+                "CMAKE_AR": "C:/Qt/Tools/mingw1310_64/bin/gcc-ar.exe",
+                "CMAKE_NM": "C:/Qt/Tools/mingw1310_64/bin/gcc-nm.exe",
+                "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "TRUE"
+            }
+        },
+        {
+            "name": "local-qt-noflags",
+            "hidden": true,
+            "generator": "MinGW Makefiles",
+            "description": "Path to your qt installation, your compiller and generator",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/g++.exe",
+                "DCMAKE_RANLIB": "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib.exe",
+                "CMAKE_AR": "C:/Qt/Tools/mingw1310_64/bin/gcc-ar.exe",
+                "CMAKE_NM": "C:/Qt/Tools/mingw1310_64/bin/gcc-nm.exe"
+            }
+        },
+        {
+            "name": "local-debug-noflags",
+            "displayName": "Local Debug NoFlags (${hostSystemName})",
+            "inherits": [
+                "dev-debug",
+                "local-qt-noflags"
+            ]
+        },
+        {
+            "name": "local-release-noflags",
+            "displayName": "Local Release NoFlags (${hostSystemName})",
+            "inherits": [
+                "dev-release",
+                "local-qt-noflags"
+            ]
+        },
+        {
+            "name": "local-debug",
+            "displayName": "Local Debug (${hostSystemName})",
+            "inherits": [
+                "dev-debug",
+                "local-qt"
+            ]
+        },
+        {
+            "name": "local-release",
+            "displayName": "Local Release (${hostSystemName})",
+            "inherits": [
+                "dev-release",
+                "local-qt"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "local-debug",
+            "configurePreset": "local-debug",
+            "targets": [
+                "all",
+                "install"
+            ],
+            "jobs": 64
+        },
+        {
+            "name": "local-release",
+            "configurePreset": "local-release",
+            "targets": [
+                "all",
+                "install"
+            ],
+            "jobs": 64
+        },
+        {
+            "name": "local-debug-noflags",
+            "configurePreset": "local-debug-noflags",
+            "targets": [
+                "all",
+                "install"
+            ],
+            "jobs": 64
+        },
+        {
+            "name": "local-release-noflags",
+            "configurePreset": "local-release-noflags",
+            "targets": [
+                "all",
+                "install"
+            ],
+            "jobs": 64
+        }
+    ]
+}
