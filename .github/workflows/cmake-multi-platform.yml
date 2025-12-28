@@ -49,13 +49,6 @@ jobs:
             arch_flags: "-m32"
             lib_pattern: "*.so"
             
-          - os: ubuntu-latest
-            name: linux-x64-clang
-            c_compiler: clang
-            cpp_compiler: clang++
-            arch_flags: ""
-            lib_pattern: "*.so"
-
           # === macOS ===
           - os: macos-latest
             name: macos-universal
@@ -179,7 +172,8 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    # НЕ запускаем только для pull_request
+    if: github.event_name != 'pull_request'
     
     permissions:
       contents: write
@@ -196,8 +190,10 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
-          else
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
             VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="v0.0.0-build.${{ github.run_number }}"
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Release version: $VERSION"
