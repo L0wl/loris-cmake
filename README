@@ -18,6 +18,52 @@ For documentation, please see the files in the doc subdirectory.
 For a list of major changes to Loris, organized by release number,
 please see the file NEWS.
 
+BUILDING:
+
+For building and installing this library - you need to configure presets, before we start.
+We currently have configured presets, what im currently use for build this project
+There's names of the presets: 'local-debug', 'local-release'. 
+
+You can configure presets right inside of the CMakeUserPresets.txt, 
+and specify your own paths for compilers and other build tools...
+
+This sections define some tools what should be used at the build time...
+----------------------------------------------------------------------------------
+{
+    "name": "local-qt",
+    "hidden": true,
+    "generator": "MinGW Makefiles",
+    "description": "Path to your qt installation, your compiller and generator",
+    "cacheVariables": {
+        "CMAKE_C_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER": "C:/Qt/Tools/mingw1310_64/bin/g++.exe",
+        "DCMAKE_RANLIB": "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib.exe",
+        "CMAKE_AR": "C:/Qt/Tools/mingw1310_64/bin/gcc-ar.exe",
+        "CMAKE_NM": "C:/Qt/Tools/mingw1310_64/bin/gcc-nm.exe",
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "TRUE"
+    }
+}
+----------------------------------------------------------------------------------
+
+Before building this project - we need to configure CMake project.
+So we can do that, by following this command below
+----------------------------------------------------------------------------------
+cmake --preset local-debug
+----------------------------------------------------------------------------------
+
+After that you will see these lines, telling about successful configuration
+----------------------------------------------------------------------------------
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: <path>
+----------------------------------------------------------------------------------
+
+After this step we can go forward to building project files...
+So follow this command to build entire project and install builded library
+----------------------------------------------------------------------------------
+cmake --build --preset local-debug
+----------------------------------------------------------------------------------
+
 INSTALLATION: 
 
 For generic configuration and installation instructions, see
